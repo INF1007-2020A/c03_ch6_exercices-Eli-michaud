@@ -4,27 +4,50 @@
 
 def order(values: list = None) -> bool:
     if values is None:
-        # TODO: Demander les valeurs ici
-        pass
+        for nb in range(0, 9):
+            list.append(input('Veuillez entrer un nombre entier: '))
 
-    return False
+    return list == sorted(list)
 
 
 def anagrams(words: list = None) -> bool:
     if words is None:
         # TODO: Demander les mots ici
-        pass
+        mot1 = input("Veuillez entrer un mot : ")
+        mot2 = input("Veuillez entrer un deuxieme mot : ")
+    if len(mot1) == len(mot2):
+        for lettre in mot1:
+            mot2.remove(lettre)
+        if len(mot2) == 0:
+            print("Anagramme")
+        else:
+            print("raté!")
 
     return False
 
 
 def contains_doubles(items: list) -> bool:
+    for element in items:
+        if items.count(element) > 1:
+            return True
     return False
 
 
 def best_grades(student_grades: dict) -> dict:
     # TODO: Retourner un dictionnaire contenant le nom de l'étudiant ayant la meilleure moyenne ainsi que sa moyenne
-    return {}
+    moyenne = {}
+    for étudiant, résultats in student_grades.items():
+        somme = 0
+        for note in résultats:
+            somme += note
+        moyenne[étudiant] = somme / len(résultats)
+
+    moyenneLaPlusHaute = max(moyenne.values())
+    for étudiant, moyenne in moyenne.items():
+        if moyenne[étudiant] == moyenneLaPlusHaute:
+            étudiantLePlusFort = étudiant
+
+    return {étudiantLePlusFort: moyenneLaPlusHaute}
 
 
 def histogram(sentence: str) -> tuple:
@@ -36,13 +59,25 @@ def histogram(sentence: str) -> tuple:
 
 
 def get_recipes():
-    # TODO: Demander le nom d'une recette, puis ses ingrédients et enregistrer dans une structure de données 
-    pass
+    # TODO: Demander le nom d'une recette, puis ses ingrédients et enregistrer dans une structure de données
+    nomRecette = input("Quel est le nom de la recette? ")
+    recette = {}
+    recette[nomRecette] = []
+    ajouterIngrédient = True
+    while ajouterIngrédient:
+        recette[nomRecette].append(input("Veuillez entrer un ingrédient: "))
+        ajouterIngrédient = input("Voulez vous ajouter un autre ingrédient? Entrer 'oui' ou 'non': ")
+        ajouterIngrédient = ajouterIngrédient == 'oui'
+
+    return recette
 
 
 def print_recipe(ingredients) -> None:
     # TODO: Demander le nom d'une recette, puis l'afficher si elle existe
-    pass
+    nomRecetteVoulue = input("Veuillez choisir une recette: ")
+    for recette, listeIngrédients in ingredients.items():
+        if recette == nomRecetteVoulue:
+            print(listeIngrédients)
 
 
 def main() -> None:
